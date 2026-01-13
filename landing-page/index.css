@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-black: #050505;
+  --brand-dark: #0a0a0a;
+  --brand-green: #00ff88;
+  --brand-green-dim: #00cc6a;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--brand-black);
+    color: white;
+  }
+
+  ::selection {
+    background-color: var(--brand-green);
+    color: black;
+  }
+}
+
+@layer components {
+
+  /* Premium Glass Card */
+  /* Premium Glass Card */
+  .glass-card {
+    @apply bg-[#0a0a0a]/80 backdrop-blur-2xl border border-white/5 shadow-xl transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    @apply border-white/10 shadow-2xl;
+  }
+
+  /* Input Fields mimicking the screenshot */
+  .premium-input {
+    @apply w-full bg-[#111] border border-white/5 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand-green/50 focus:ring-1 focus:ring-brand-green/20 transition-all;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--brand-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-green);
+}
+
+/* Animation Utilities */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.1);
+  }
+
+  to {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+}

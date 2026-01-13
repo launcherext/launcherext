@@ -1,0 +1,38 @@
+
+> launch-ext@1.0.0 build
+> webpack --mode production
+
+assets by status 896 KiB [1m[32m[cached][39m[22m 13 assets
+orphan modules 102 KiB [1m[33m[orphan][39m[22m 36 modules
+runtime modules 7.72 KiB 15 modules
+modules by path [1m./[39m[22m 1.88 MiB
+  modules by path [1m./node_modules/[39m[22m 1.11 MiB 57 modules
+  modules by path [1m./extension/[39m[22m 791 KiB
+    modules by path [1m./extension/lib/*.ts[39m[22m 30.6 KiB
+      [1m./extension/lib/api-client.ts[39m[22m 7.85 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+      [1m./extension/lib/storage.ts[39m[22m 1.38 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+      + 2 modules
+    modules by path [1m./extension/popup/[39m[22m 77.1 KiB
+      [1m./extension/popup/index.tsx + 21 modules[39m[22m 77 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+      ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js![1m./extension/popup/styles/globals.css[39m[22m 39 bytes [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m [1m[31m[1 error][39m[22m
+    [1m./extension/background/service-worker.ts[39m[22m 1.95 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    [1m./extension/content/wallet-bridge.ts + 24 modules[39m[22m 682 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+[1mbuffer (ignored)[39m[22m 15 bytes [1m[33m[optional][39m[22m [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./extension/popup/styles/globals.css[39m[22m (./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./extension/popup/styles/globals.css)
+Module build failed (from ./node_modules/postcss-loader/dist/cjs.js):
+
+SyntaxError
+
+(34:5) C:\Users\offic\Desktop\launch-ext\extension\popup\styles\globals.css The `shadow-[0_0_15px_rgba(0,` class does not exist. If `shadow-[0_0_15px_rgba(0,` is a custom class, make sure it is defined within a `@layer` directive.
+
+ [90m 32 | [39m
+ [90m 33 | [39m  [33m.premium-button[39m [33m{[39m
+[1m[31m>[39m[22m[90m 34 | [39m    [36m@apply[39m relative overflow-hidden bg-brand-green text-black font-bold uppercase tracking-wider hover[33m:[39mscale-[33m[[39m1.02[33m][39m active[33m:[39mscale-[33m[[39m0.98[33m][39m transition-all shadow-[33m[[39m[36m0_0_15px_rgba[39m[36m(0, 255, 136, 0.3)[39m[33m][39m hover[33m:[39mshadow-[33m[[39m[36m0_0_25px_rgba[39m[36m(0, 255, 136, 0.5)[39m[33m][39m[33m;[39m
+ [90m    | [39m    [1m[31m^[39m[22m
+ [90m 35 | [39m  [33m}[39m
+ [90m 36 | [39m
+ @ ./extension/popup/styles/globals.css 8:6-156 22:17-24 27:22-29 27:33-47 27:50-64 26:0-126 26:0-126
+ @ ./extension/popup/index.tsx 5:0-30
+
+webpack 5.104.1 compiled with [1m[31m1 error[39m[22m in 11014 ms

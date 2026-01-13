@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Banner {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  prompt        String
+  style         String
+  imageUrl      String
+  seed          Int
+  walletAddress String?
+  outputType    String   @default("banner") // "banner" or "pfp"
+  recipeId      String?
+
+  @@index([walletAddress])
+  @@index([createdAt])
+}
+
+model Launch {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  signature     String   @unique
+  mint          String
+  name          String
+  symbol        String
+  walletAddress String
+  
+  @@index([walletAddress])
+  @@index([createdAt])
+}

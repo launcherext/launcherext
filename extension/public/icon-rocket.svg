@@ -1,0 +1,35 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background space -->
+  <rect width="512" height="512" fill="#1a1a1a" rx="64"/>
+  
+  <!-- Stars -->
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="100" cy="80" r="2"/>
+    <circle cx="150" cy="120" r="2"/>
+    <circle cx="380" cy="90" r="2"/>
+    <circle cx="420" cy="140" r="2"/>
+    <circle cx="90" cy="180" r="2"/>
+    <circle cx="400" cy="200" r="2"/>
+  </g>
+  
+  <!-- Rocket body (green) -->
+  <path d="M 256 80 L 296 200 L 296 320 L 216 320 L 216 200 Z" fill="#00ff88"/>
+  
+  <!-- Rocket window -->
+  <ellipse cx="256" cy="160" rx="32" ry="40" fill="#0a0a0a" opacity="0.8"/>
+  <ellipse cx="256" cy="160" rx="24" ry="32" fill="#1a1a1a"/>
+  
+  <!-- Rocket fins -->
+  <path d="M 216 240 L 180 320 L 216 300 Z" fill="#00cc6a"/>
+  <path d="M 296 240 L 332 320 L 296 300 Z" fill="#00cc6a"/>
+  
+  <!-- Rocket flames -->
+  <path d="M 216 320 L 200 380 L 220 360 L 230 400 L 240 360 L 256 420 L 272 360 L 282 400 L 292 360 L 312 380 L 296 320 Z" fill="#ff4444"/>
+  <path d="M 226 320 L 220 350 L 235 340 L 240 370 L 250 340 L 256 390 L 262 340 L 272 370 L 277 340 L 292 350 L 286 320 Z" fill="#ffaa00"/>
+  <path d="M 236 320 L 235 340 L 245 335 L 248 355 L 254 335 L 256 365 L 258 335 L 264 355 L 267 335 L 277 340 L 276 320 Z" fill="#ffff00"/>
+  
+  <!-- Exhaust cloud -->
+  <ellipse cx="256" cy="420" rx="80" ry="20" fill="#cccccc" opacity="0.4"/>
+  <ellipse cx="240" cy="430" rx="60" ry="15" fill="#cccccc" opacity="0.3"/>
+  <ellipse cx="272" cy="430" rx="60" ry="15" fill="#cccccc" opacity="0.3"/>
+</svg>
