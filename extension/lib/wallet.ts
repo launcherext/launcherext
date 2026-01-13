@@ -292,29 +292,36 @@ export class ExternalWallet {
         const providerType = this.provider.type;
 
         try {
-          // Ensure content script is injected (in case it's not loaded yet)
+          // Ensure content script is injected into MAIN world
           try {
             await chrome.scripting.executeScript({
               target: { tabId: tab.id },
+              world: 'MAIN',
               files: ['content/wallet-bridge.js'],
             });
           } catch (err) {
-            // Content script might already be injected, that's okay
-            console.log('Content script already injected or failed to inject:', err);
+            console.log('Content script injection warning:', err);
           }
 
           // Give content script a moment to initialize
           await new Promise(resolve => setTimeout(resolve, 100));
 
-          // Send message to content script which has access to both wallet provider and @solana/web3.js
-          const response: any = await chrome.tabs.sendMessage(tab.id, {
-            type: 'SIGN_TRANSACTION',
-            transactionBase58: serializedTx,
-            providerType: providerType,
+          // Execute signing via global bridge in MAIN world
+          const results = await chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            world: 'MAIN',
+            func: async (txBase58: string, type: string) => {
+              const bridge = (window as any).__LaunchExtBridge;
+              if (!bridge) throw new Error('Wallet Bridge not initialized');
+              return await bridge.signTransaction(txBase58, type);
+            },
+            args: [serializedTx, providerType],
           });
 
-          if (!response.success || !response.signedTransactionBase58) {
-            throw new Error(response.error || 'Failed to sign transaction');
+          const response = results[0]?.result;
+
+          if (!response || !response.success || !response.signedTransactionBase58) {
+            throw new Error(response?.error || 'Failed to sign transaction');
           }
 
           // Deserialize signed transaction

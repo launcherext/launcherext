@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 
 interface ModalProps {
@@ -10,9 +11,16 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, footer }) => {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex justify-center animate-fadeIn pt-[100px] px-4">
       {/* Backdrop */}
       <div
@@ -51,7 +59,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, footer 
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

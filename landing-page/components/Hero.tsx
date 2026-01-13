@@ -25,16 +25,16 @@ const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="group relative bg-brand-green hover:bg-brand-greenDim text-brand-black font-bold text-lg px-8 py-4 rounded-xl transition-all hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(0,255,136,0.3)] flex items-center justify-center gap-3">
+            <a href="https://github.com/launcherext/launcherext" target="_blank" rel="noopener noreferrer" className="group relative bg-brand-green hover:bg-brand-greenDim text-brand-black font-bold text-lg px-8 py-4 rounded-xl transition-all hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(0,255,136,0.3)] flex items-center justify-center gap-3">
                 <Download className="w-5 h-5" />
                 Download Extension
                 <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-            </button>
+            </a>
             
-            <button className="bg-brand-dark hover:bg-gray-800 border border-gray-700 text-white font-semibold text-lg px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-3">
+            <a href="https://github.com/launcherext/launcherext" target="_blank" rel="noopener noreferrer" className="bg-brand-dark hover:bg-gray-800 border border-gray-700 text-white font-semibold text-lg px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-3">
                 <Terminal className="w-5 h-5 text-gray-400" />
                 View Source
-            </button>
+            </a>
         </div>
 
         <div className="pt-8 flex items-center justify-center lg:justify-start gap-8 text-gray-500 text-sm font-mono">

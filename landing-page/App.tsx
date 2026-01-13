@@ -31,9 +31,9 @@ function App() {
                 <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto relative z-10">
                     Join thousands of degens launching faster, smarter, and safer with Launch Ext.
                 </p>
-                <button className="relative z-10 bg-brand-green hover:bg-brand-greenDim text-brand-black text-xl font-bold px-10 py-4 rounded-xl transition-transform hover:scale-105 shadow-[0_0_20px_rgba(0,255,136,0.4)]">
+                <a href="https://github.com/launcherext/launcherext" target="_blank" rel="noopener noreferrer" className="inline-block relative z-10 bg-brand-green hover:bg-brand-greenDim text-brand-black text-xl font-bold px-10 py-4 rounded-xl transition-transform hover:scale-105 shadow-[0_0_20px_rgba(0,255,136,0.4)]">
                     Add to Chrome - It's Free
-                </button>
+                </a>
             </div>
         </section>
       </main>
