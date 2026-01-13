@@ -14,6 +14,10 @@ import { Connection, PublicKey } from "@solana/web3.js";
 let serverLaunchTime: number | null = null;
 const LAUNCH_TIME_KEY = 'DEXGEN_LAUNCH_TIME';
 
+export const maxDuration = 60; // Allow 60 seconds for generation
+export const dynamic = 'force-dynamic'; // Disable static optimization
+
+
 function isInFreePeriod(): boolean {
   // OPEN ACCESS MODE: App is open to everyone while launch is rescheduled
   // Set this to false when ready to enforce token gating
@@ -300,6 +304,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<GenerateR
       {
         success: false,
         error: error instanceof Error ? error.message : "Unknown error occurred",
+        details: error instanceof Error ? error.stack : undefined,
       },
       { status: 500 }
     );
