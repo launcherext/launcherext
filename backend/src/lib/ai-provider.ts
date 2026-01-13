@@ -459,34 +459,29 @@ No text, watermarks, or overlays in the output.`,
 
     if (!response.ok) {
       const errorText = await response.text();
-      // Check for specific modality error
-      if (errorText.includes("response modalities")) {
-        console.warn("Gemini model doesn't support image generation, falling back to Pollinations...");
-        return generateWithPollinations(prompt, seed, undefined, dimensions);
-      }
-      console.error("Gemini API error response:", errorText);
-      throw new Error(`Gemini API error: ${errorText}`);
+      console.warn(`Gemini API error (falling back to Pollinations): ${errorText}`);
+      return generateWithPollinations(prompt, seed, undefined, dimensions);
     }
 
     const result = await response.json();
 
     // Check for blocked content or safety filters
     if (result.promptFeedback?.blockReason) {
-      console.error("Gemini blocked request:", result.promptFeedback);
-      throw new Error(`Content blocked: ${result.promptFeedback.blockReason}`);
+      console.warn(`Gemini blocked request (falling back to Pollinations): ${result.promptFeedback.blockReason}`);
+      return generateWithPollinations(prompt, seed, undefined, dimensions);
     }
 
     // Extract the image from the response
     const candidates = result.candidates;
     if (!candidates || candidates.length === 0) {
-      console.error("Gemini response:", JSON.stringify(result, null, 2));
-      throw new Error("No image generated from Gemini - check safety filters");
+      console.warn("Gemini: No candidates returned (falling back to Pollinations)");
+      return generateWithPollinations(prompt, seed, undefined, dimensions);
     }
 
     // Check if the candidate was blocked
     if (candidates[0].finishReason === "SAFETY") {
-      console.error("Gemini safety filter triggered:", candidates[0]);
-      throw new Error("Image generation blocked by safety filters");
+      console.warn("Gemini: Safety filter triggered (falling back to Pollinations)");
+      return generateWithPollinations(prompt, seed, undefined, dimensions);
     }
 
     // Find the image part in the response (response uses camelCase: inlineData)
@@ -497,20 +492,14 @@ No text, watermarks, or overlays in the output.`,
     );
 
     if (!imagePart?.inlineData?.data) {
-      // Log what we got for debugging
-      console.error("Gemini response parts:", JSON.stringify(responseParts, null, 2));
-      // Check if we got text instead of image
-      const textPart = responseParts.find((part: { text?: string }) => part.text);
-      if (textPart) {
-        console.error("Gemini returned text instead of image:", textPart.text);
-      }
-      throw new Error("No image data in Gemini response");
+      console.warn("Gemini: No image data in response (falling back to Pollinations)");
+      return generateWithPollinations(prompt, seed, undefined, dimensions);
     }
 
     // Validate base64 data is not empty or too short
     if (imagePart.inlineData.data.length < 100) {
-      console.error("Gemini returned invalid image data (too short)");
-      throw new Error("Invalid image data from Gemini");
+      console.warn("Gemini: Invalid image data length (falling back to Pollinations)");
+      return generateWithPollinations(prompt, seed, undefined, dimensions);
     }
 
     return {
@@ -519,7 +508,7 @@ No text, watermarks, or overlays in the output.`,
       prompt,
     };
   } catch (error) {
-    console.warn("Gemini generation failed, falling back to Pollinations:", error);
+    console.error("Gemini generation unexpected error (falling back to Pollinations):", error);
     return generateWithPollinations(prompt, seed, undefined, dimensions);
   }
 }
